@@ -36,7 +36,6 @@ deletenote(id) {
             return (
               <ul>  
  <li key={note.id}>{note.text} </li>               
- <button type="button" onClick={() => this.check(note.uid)}>  terminar </button>
                 <button type="button"  onClick={() => this.deletenote(note.uid)}>eliminar</button>
               </ul>
             )

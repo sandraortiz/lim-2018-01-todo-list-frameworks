@@ -20,11 +20,16 @@ class App extends Component {
     e.preventDefault();
     let  note = this.state.note;
     if(  note.length !== 0 &&   note.trim() !== '' ) {
-      let uid = firebase.database().ref().child('todo').push().key;
-      firebase.database().ref('todo/'+uid).set({
-        uid: uid,
-       text:  note,
-      });
+      let dbRef = firebase.database().ref().child('todo').push().key;
+      const notes = {
+        uid:dbRef,
+        text:note
+      }
+      const updates = {}
+      updates['/todo/' + dbRef] =notes;
+  return  firebase.database().ref().update(updates);
+
+     
    }
   }
 
