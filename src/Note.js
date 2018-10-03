@@ -27,15 +27,24 @@ deletenote(id) {
   firebase.database().ref('todo').child(id).remove();
 }
 
+check(text,id){
+return(
+  // <li id={id}>  {text} </li>               
+alert('tarea terminada' +  text  ) 
+
+)
+}
+
  render() {
    return ( 
      <div>
        
        <ul>
-          {this.state.notes.map((note, id) => {
+          {this.state.notes.map((note) => {
             return (
               <ul>  
  <li key={note.id}>{note.text} </li>               
+ <button type="button" onClick={() => this.check(note.text , note.id)}>  terminar </button>
                 <button type="button"  onClick={() => this.deletenote(note.uid)}>eliminar</button>
               </ul>
             )
