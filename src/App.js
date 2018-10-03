@@ -8,45 +8,38 @@ class App extends Component {
 }
 
 componentWillMount(){
-  firebase.database().ref('posts').orderByKey().on('child_added', snapshot => {
-    let message = { text:snapshot.val().text , id: snapshot.keyposts ,  };
-    this.setState({ messages: [message].concat(this.state.messages)
-    });
-   })
+  let messagesRef = firebase.database().ref('todo').orderByKey();
+  messagesRef.on('child_added', snapshot => {
+  let message = { text: snapshot.val(), id: snapshot.key };
+  this.setState({ messages: [message].concat(this.state.messages)
+  });
+ })
+  
+ 
 }
 
 
 addMessage(e){
   e.preventDefault();
-  // firebase.database().ref('posts').push( this.inputEl.value );
-  // this.inputEl.value = '';
-  
-  const dbRef = firebase.database().ref().child('posts').push().key;
-  const record = {
-    keyposts : dbRef ,
-
-    text: this.postContent.value,
-  }
-  const updates = {};
-  updates['/posts/' + dbRef] = record;
-
-  return firebase.database().ref().update(updates);
+  firebase.database().ref('todo').push( this.inputEl.value );
+  this.inputEl.value = '';
  }
- deleteMessage() {
-   
-  firebase.database().ref().child(`/posts/${this.postContent.key}`).remove();
- }
+
 
  render() {
   return (
    <form onSubmit={this.addMessage.bind(this)}>
-    <input type="text" ref={ el => this.postContent = el }/>
+    <input type="text" ref={ el => this.inputEl = el }/>
     <input type="submit"/>
     <ul>
      {
-      this.state.messages.map( message => <li
-      key={message.id}>{message.text}     <button onClick={this.deleteMessage}> eliminar </button>
-   </li> )
+      this.state.messages.map( message =>
+        <div> 
+             <li
+      key={message.id}>{message.text} </li> <button id={message.id}> elimnar </button>
+           </div>
+     
+    )
      }
     </ul>
    </form>
