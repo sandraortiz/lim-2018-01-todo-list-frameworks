@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Note from './Note.js'
 import firebase from './firebase';
 
+
+import{Button} from 'mdbreact';
+
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -37,13 +41,29 @@ class App extends Component {
 render() {
   return (
    
-  <div>     
- <form onSubmit={this.handleSubmit}>
-          <input  value={this.state.note} onChange={this.handleNoteChange.bind(this)}  />
-              <button type="submit" >añadir</button>
-         </form> 
-        <Note />
+<div className="container">
+
+ <h1> To do list  </h1>
+
+    <div className="row">
+ 
+
+      <div className="col">
+
+   <input type="text"  className="form-control"  value={this.state.note} onChange={this.handleNoteChange.bind(this)} />
+    <Button  type="submit" onClick={this.handleSubmit} >INGRESAR</Button>
+
+  
+     
+       <Note class='z-depth-5'/>
+
+        </div>
+     
+    </div>
 </div>
+
+
+  
     
   
  )}}

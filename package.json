@@ -5,6 +5,7 @@
   "homepage": "https://sandraortiz.github.io/lim-2018-01-todo-list-frameworks",
   "dependencies": {
     "firebase": "^5.5.2",
+    "mdbreact": "^4.8.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-scripts": "1.1.5"
